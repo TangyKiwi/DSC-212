@@ -28,4 +28,33 @@
     \item A
     \item B
 \end{enumerate}
+
+\section{Extended Monty Hall Problem}
+\begin{flushleft}
+    Suppose you have $n$ doors, where behind 1 is the car and behind $n - 1$ are
+    goats. Monty Hall will open $k ([0, n - 2])$ doors as he has to leave one door
+    unopened for you to switch to, and the original door you picked. The chance
+    that you picked the car originally is $\frac{1}{n}$, hence the chance you didn't
+    pick the car is $\frac{n - 1}{n}$. When Monty Hall opens $k$ doors, the probability
+    that you should switch to win is now determined by the probability you didn't 
+    pick the correct door the first times multiplied by the new probability that
+    you pick the correct door when you switch, given by:
+\end{flushleft}
+\begin{gather*}
+    \frac{n - 1}{n} \cdot \frac{1}{n - k - 1} = \frac{1}{n} \cdot \frac{n - 1}{n - k - 1}
+\end{gather*}
+\begin{flushleft}
+    Suppose Monty Hall opens $n - 2$ doors, then when you switch the probablity
+    of winning becomes apparent:
+\end{flushleft}
+\begin{gather*}
+    \frac{n - 1}{n} \cdot \frac{1}{n - (n - 2) - 1} = \frac{n - 1}{n}
+\end{gather*}
+\begin{flushleft}
+    In the standard Monty Hall problem where $n = 3$ and $k = 1$, the probability 
+    of winning when you switch is:
+\end{flushleft}
+\begin{gather*}
+    \frac{3 - 1}{3} \cdot \frac{1}{3 - 1 - 1} = \frac{2}{3}
+\end{gather*}
 \end{document}
