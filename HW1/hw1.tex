@@ -1,0 +1,171 @@
+%! Author = Kevin Lin
+%! Date = 10/9/2025
+
+% Preamble
+\documentclass[11pt,a4paper,margin=1in]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\title{HW 1}
+\author{Kevin Lin}
+\date{10/9/2025}
+
+% Document
+\begin{document}
+\maketitle
+\section{}
+    Let event $A$ be the event that in a group of $n$ people, no one shares a birthday.
+    Let event $B$ be the complement of event $A$, such that in a group of $n$ people,
+    at least 2 people share a birthday. Thus, $P(B) = 1 - P(A)$. We can calculate
+    $P(A)$ by starting with the first person, who can have any birthday. The next
+    person must have a different birthday, thus have a $\frac{364}{365}$ chance of
+    not sharing a birthday with the first person. This goes on until the $n$th person,
+    who has a $\frac{365 - n + 1}{365}$ chance of not sharing a birthday with any
+    of the previous $n - 1$ people. Thus, we have:
+    
+    \begin{gather*}
+        P(A) = \frac{365}{365} \cdot \frac{364}{365} \cdot \frac{363}{365} \cdots \frac{365 - n + 1}{365} = \frac{1}{365^n} \cdot \frac{365 \cdot 364 \cdots (365 - n + 1)}{1}\\
+        \text{Recognize that } \frac{365 \cdot 364 \cdots (365 - n + 1)}{1} = \frac{365!}{(365 - n)!} \therefore\\
+        P(A) = \frac{365!}{365^n (365 - n)!}
+    \end{gather*}
+
+    \noindent We want to find a minimum $n$ such that $P(B) \geq 0.5 \therefore P(A) < 0.5$.
+    Solving $P(A) < 0.5$ for $n$, we find that the minimum $n$ is 23, where $P(A) \approx 0.493$
+    and $P(B) \approx 0.507$.
+
+    \vspace{10pt}
+
+    \noindent Thus, in a group of $n$ unrelated individuals, the probability that at least
+    2 people share a birthday is $P(B) = 1 - \frac{365!}{365^n (365 - n)!}$.
+    This probability exceeds 0.5 when $n \geq 23$.
+
+\section{}
+    \subsection{}
+        Each bag has a probability of $\frac{1}{3}$ of being chosen. The probability
+        of drawing a blue marble at random is thus the sum of the probabilities
+        of drawing a blue marble from each bag multiplied by the probability of
+        choosing that bag. Thus, we have:
+        \begin{gather*}
+            P(\text{blue marble}) = \frac{1}{3} \cdot \frac{25}{100} + \frac{1}{3} \cdot \frac{40}{100} + \frac{1}{3} \cdot \frac{55}{100} = \frac{2}{5} = 0.4
+        \end{gather*} 
+    \subsection{}
+        If the first bag has the probability of $0.5$ of being chosen, the other
+        two bags then have a probability of $0.25$ of being chosen. Thus, we now
+        have:
+        \begin{gather*}
+            P(\text{blue marble}) = 0.5 \cdot \frac{25}{100} + 0.25 \cdot \frac{40}{100} + 0.25 \cdot \frac{55}{100} = \frac{29}{80} = 0.3625
+        \end{gather*}
+
+\section{}
+    For the gambler's current fortune of $k$ dollars, they can either win or lose
+    on the next gamble. Thus by the law of total probability, we have:
+    \begin{gather*}
+        q_k = \frac{1}{2} \cdot q_{k + 1} + \frac{1}{2} \cdot q_{k - 1}\\
+        2q_k = q_{k + 1} + q_{k - 1}\\
+        q_{k + 1} - q_k = q_k - q_{k - 1}
+    \end{gather*}
+    This shows that the difference between consecutive $q$ values is constant, thus
+    $q_k$ is linear and can express $q_k$ as $q_k = A + Bk$ for some constants $A, B$.
+    We solve for $A, B$ using the boundary conditions where $q_0 = 1$ and $q_N = 0$:
+    \begin{gather*}
+        q_0 = A + B \cdot 0 \therefore A = 1\\
+        q_N = 1 + BN = 0 \therefore B = -\frac{1}{N}\\
+        \therefore q_k = 1 - \frac{k}{N}
+    \end{gather*}
+
+\section{}
+    For a given element $x$ in $\Omega$, the probability of $x$ being in either 
+    set $A$ or $B$ is equally likely because $A$ and $B$ are independently selected
+    subsets of $\Omega$. Thus, for any element $x$ to satisfy $A \subseteq B$, element
+    $x$ must either be:
+    \begin{itemize}
+        \item $x \notin A$ \& $x \notin B$ 
+        \item $x \notin A$ \& $x \in B$
+        \item $x \in A$ \& $x \in B$
+    \end{itemize} 
+    \noindent The only case that does not satisfy $A \subseteq B$ is if $x \in A$ \& $x \notin B$.
+    Since each of the 4 cases are equally likely, the probability of $x$ satisfying
+    $A \subseteq B$ is $\frac{3}{4}$. Since this must be true for all $n$ elements
+    in $\Omega$, the probability of $A \subseteq B$ is consequently:
+    \begin{gather*}
+        P(A \subseteq B) = \left(\frac{3}{4}\right)^n
+    \end{gather*}
+
+\section{}
+    \subsection{}
+        Each coin is equally likely to be chosen with a probability of $\frac{1}{3}$.
+        The probability of getting tails when a coin is flipped is thus the sum
+        of the probabilities of getting tails with each coin multiplied by the probability
+        of choosing that coin. Thus, we have:
+        \begin{gather*}
+            P(\text{T}) = \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot 0 = \frac{1}{3}
+        \end{gather*}
+    \subsection{}
+        \begin{gather*}
+            P(\text{fake coin} | \text{H}) = \frac{P(\text{H} | \text{fake coin}) \cdot P(\text{fake coin})}{P(\text{H})}\\
+            = \frac{1 \cdot \frac{1}{3}}{\frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot 1} = \frac{1}{2}
+        \end{gather*}
+
+\section{}
+    Any joint distribution function must satisfy:
+    \begin{enumerate}[1.]
+        \item $F(-\infty, x_2) = F(x_1, -\infty) = 0$
+        \item $F(\infty, \infty) = 0$
+        \item $F(x_1, \infty) = F(x_1)$ \& $F(\infty, x_2) = F(x_2)$
+        \item monotonicity: $F(a_1, a_2) \leq F(b_1, b_2)$ if $a_1 \leq b_1$ \& $a_2 \leq b_2$
+        \item $P(a_1 < X \leq b_1, a_2 < Y \leq b_2) = F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2) \geq 0$
+    \end{enumerate}
+    \subsection{}
+        For $F(x_1, x_2) = 1 - e^{-x_1-x_2}$ if $x_1, x_2 \geq 0$:
+        \begin{enumerate}[1.]
+            \item $F(-\infty, x_2) = F(x_1, -\infty) = 0$ is satisfied as $x_1, x_2 \geq 0$
+            \item $F(\infty, \infty) = 1 - e^{-\infty - \infty} = 1 - 0 = 1$ is satisfied
+            \item $F(x_1, \infty) = 1 - e^{-x_1 - \infty} = 1 - 0 = 1$ and $F(\infty, x_2) = 1 - e^{-\infty - x_2} = 1 - 0 = 1$ is satisfied
+            \item monotonicity is satisfied as $e^{-x}$ is a decreasing function
+            \item $P(a_1 < X \leq b_1, a_2 < Y \leq b_2) = F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2)$\\
+            = $(1 - e^{-b_1 - b_2}) - (1 - e^{-a_1 - b_2}) - (1 - e^{-b_1 - a_2}) + (1 - e^{-a_1 - a_2})$\\
+            Let $a_1 = 0, a_2 = 0, b_1 = t_1 > 0, b_2 = t_2 > 0$, then:\\
+            $P(0 < X \leq t_1, 0 < Y \leq t_2) = (1 - e^{-t_1 - t_2}) - (1 - e^{0 - t_2}) - (1 - e^{-t_1 + 0}) + (1 - e^{0 + 0})$\\
+            = $1 - e^{-t_1 - t_2} - 1 + e^{-t_2} - 1 + e^{-t_1} = e^{-t_2} + e^{-t_1} - e^{-t_1 - t_2} - 1$\\
+            = $(e^{-t_1} - 1)(1 - e^{-t_2})$\\
+            $(e^{-t_1} - 1) < 0$ and $(1 - e^{-t_2}) > 0$, therefore $P(0 < X \leq t_1, 0 < Y \leq t_2) < 0$ which violates condition 5.
+        \end{enumerate}
+        \noindent Thus, $F(x_1, x_2) = 1 - e^{-x_1-x_2}$ if $x_1, x_2 \geq 0$ is not a valid joint distribution function.
+    \subsection{}
+        For $F(x_1, x_2) = 1 - e^{-\min(x_1, x_2)} - \min(x_1, x_2) e^{-\min(x_1, x_2)}$ if $x_1, x_2 \geq 0$:
+        \begin{enumerate}[1.]
+            \item $F(-\infty, x_2) = F(x_1, -\infty) = 0$ is satisfied as $x_1, x_2 \geq 0$
+            \item $F(\infty, \infty) = 1 - e^{-\infty} - \infty \cdot e^{-\infty} = 1 - 0 - 0 = 1$ is satisfied
+            \item $F(x_1, \infty) = 1 - e^{-x_1} - x_1 e^{-x_1} = F(x_1)$ and $F(\infty, x_2) = 1 - e^{-x_2} - x_2 e^{-x_2} = F(x_2)$ is satisfied
+            \item monotonicity is satisfied as $e^{-x}$ is a decreasing function and $\min(x_1, x_2)$ is increasing
+            \item $P(a_1 < X \leq b_1, a_2 < Y \leq b_2)$ Again, let $a_1 = 0, a_2 = 0, b_1 = t, b_2 = t$ where $t > 0$, then:\\
+            $P(0 < X \leq t, 0 < Y \leq t) = F(t, t) - F(0, t) - F(t, 0) + F(0, 0)$\\
+            = $(1 - e^{-t} - t e^{-t}) - (1 - e^{0} - 0 \cdot e^{0}) - (1 - e^{0} - 0 \cdot e^{0}) + (1 - e^{0} - 0 \cdot e^{0})$\\
+            = $1 - e^{-t} - t e^{-t}$, which has a minimum of 0 when $t = 0$ and is positive for all $t > 0$ as know from condition 4.
+        \end{enumerate}
+        \noindent Thus, $F(x_1, x_2) = 1 - e^{-\min(x_1, x_2)} - \min(x_1, x_2) e^{-\min(x_1, x_2)}$ if $x_1, x_2 \geq 0$ is a valid joint distribution function. 
+        Marginal distribution functions $F_1(x_1)$ and $F_2(x_2)$ are determined in condition 3.
+
+\section{}
+    For $\max(X, Y)$, both $X$ and $Y$ must be less than or equal to some value 
+    $t$ for $\max(X, Y)$ to be possible. Thus:
+    \begin{gather*}
+        P(\max(X, Y) \leq t) = P(X \leq t, Y \leq t)\\
+        \text{By independence, } P(X \leq t, Y \leq t) = P(X \leq t) P(Y \leq t)\\
+        \therefore F_{\max}(t) = F(t) G(t)
+    \end{gather*}
+    For $\min(X, Y)$, either $X$ or $Y$ must be greater than to some value $t$
+    for $\min(X, Y)$ to be possible. Thus:
+    \begin{gather*}
+        P(\min(X, Y) > t) = P(X > t, Y > t)\\
+        \text{By independence, } P(X > t, Y > t) = P(X > t) P(Y > t)\\
+        \text{By law of total probability, } P(X > t) = 1 - P(X \leq t) = 1 - F(t)\\
+        \text{Likewise, } P(Y > t) = 1 - G(t)\\
+        \therefore P(\min(X, Y) > t) = (1 - F(t))(1 - G(t))\\
+        \text{By law of total probability, } P(\min(X, Y) \leq t) = 1 - P(\min(X, Y) > t)\\
+        \therefore F_{\min}(t) = 1 - (1 - F(t))(1 - G(t)) = F(t) + G(t) - F(t)G(t)
+    \end{gather*}
+\end{document}
