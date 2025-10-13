@@ -57,4 +57,72 @@
 \begin{gather*}
     \frac{3 - 1}{3} \cdot \frac{1}{3 - 1 - 1} = \frac{2}{3}
 \end{gather*}
+
+\section{Bayes}
+\begin{flushleft}
+    In a channel, you can send either a 0 or 1. The probability of sending a 0 is 
+    $\frac{2}{3}$ and the probability of sending a 1 is $\frac{1}{3}$. The probability
+    that a number is received correctly as is $\frac{3}{4}$ and incorrectly is
+    is $\frac{1}{4}$. What is P(1 sent | 1 received)?
+\end{flushleft}
+\begin{gather*}
+    P(1 \text{ sent} | 1 \text{ received}) = \frac{P(1 \text{ received} | 1 \text{ sent}) \cdot P(1 \text{ sent})}{P(1 \text{ received})}\\
+    = \frac{\frac{3}{4} \cdot \frac{1}{3}}{\frac{2}{3} \cdot \frac{1}{4} + \frac{1}{3} \cdot \frac{3}{4}}
+    = \frac{\frac{1}{4}}{\frac{1}{6} + \frac{1}{4}}
+    = \frac{3}{5}
+\end{gather*}
+
+\section{(Cumulative) Distribution Function}
+\begin{flushleft}
+    The probability that $X(\omega)$ resides in the interval $(-\infty, x]$ depends 
+    on only the right endpoint $x$, hence it is convenient to:
+\end{flushleft}
+\begin{gather*}
+    F : x \mapsto P(X \leq x) \\
+    F(x) = P(X \leq x) = P({\omega : X(\omega) \leq x}) = P(X^{-1}(-\infty, x])\\
+\end{gather*}
+\begin{flushleft}
+    Properties of $F$:
+\end{flushleft}
+\begin{enumerate}[1.]
+    \item Right continuous
+    \item Increase monotonically
+    \item Has limits $F(-\infty) = 0$ and $F(\infty) = 1$
+    \item 
+        $P(a < X \leq b) = F(b) - F(a)$ \\
+        $P((a, b]) = P((-\infty, b]) - P((-\infty, a])$ \\
+\end{enumerate}
+\begin{itemize}
+    \item Determines probabilities of all types of intervals
+    \item Once the CDF is known, the original probability space is in the background
+    \item From this point, we can just deal with $F$, as if it were a real-line
+    sample space governed by the distribution $F$
+\end{itemize}
+\begin{flushleft}
+    When the number of times $F(X-) \neq F(x)$ is countable, we say $X$ is a 
+    discrete random variable. Note that intervals $F(x) - F(x-)$ are all disjoint
+    at each point of a jump, therefore must contain a rational number of events
+    within.
+\end{flushleft}
+\subsection{Discrete Distribution}
+\begin{flushleft}
+    If we can enumerate the point of jumps for any distribution function, we can
+    define the probability of each jump point and hence achieve a discrete distribution.\\
+
+    Let $u(x)$ be a unit step function, and $u(x) = 1$ if $x \geq 0$, else 0.\\
+    $F$ is a \textit{discrete distribution} if it can be represented as: 
+\end{flushleft}
+\begin{gather*}
+    F(x) = \sum_{j} p_j u(x - x_j) \\
+\end{gather*}
+\begin{flushleft}
+    where ${x_j}$ is a countable set of real numbers, $p_j > 0$ are such that 
+    $\sum_j p_j = 1$.
+\end{flushleft}
+\subsection{Heaviside Distribution}
+\begin{flushleft}
+    $F(x) = u(x - x_0)$ is a discrete distribution with a fixed value $x_0$ with
+    probability 1. Hence $P(X \geq x_0) = 1$ and $P(X < x_0) = 0$. Standard value
+    for $x_0$ is 0. Can use indicator function to define such.
+\end{flushleft}
 \end{document}
