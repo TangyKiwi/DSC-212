@@ -125,4 +125,24 @@
     probability 1. Hence $P(X \geq x_0) = 1$ and $P(X < x_0) = 0$. Standard value
     for $x_0$ is 0. Can use indicator function to define such.
 \end{flushleft}
+
+\section{Moments}
+Let $X$ be a random variable given the following distribution:
+\begin{gather*}
+    X = \begin{cases} 0, \quad 1 - p \\ 1, \quad p \end{cases} \\
+    E[X^2] = 0^2 \cdot (1 - p) + 1^2 \cdot p = p \\
+    E[X] = p \\
+    Var(X) = E[X^2] - (E[X])^2 = p - p^2 = p(1 - p) \\
+\end{gather*}
+Now let $X$ be a random variable following a uniform distribution:
+\begin{gather*}
+    f_X(x) = \begin{cases} \frac{1}{b - a}, \quad a \leq x \leq b \\ 0, \quad else \end{cases} \\
+    E[X] = \int_{a}^{b} x f_X(x) dx = \int_{a}^{b} x \cdot \frac{1}{b - a} dx = \frac{1}{b - a} \cdot \frac{x^2}{2} \bigg|_{a}^{b} \\
+    = \frac{1}{b - a} \cdot \left( \frac{b^2}{2} - \frac{a^2}{2} \right) = \frac{b^2 - a^2}{2(b - a)} = \frac{b + a}{2} \\
+    E[X^2] = \int_{a}^{b} x^2 f_X(x) dx = \int_{a}^{b} x^2 \cdot \frac{1}{b - a} dx = \frac{1}{b - a} \cdot \frac{x^3}{3} \bigg|_{a}^{b} \\
+    = \frac{1}{b - a} \cdot \left( \frac{b^3}{3} - \frac{a^3}{3} \right) = \frac{b^3 - a^3}{3(b - a)} = \frac{(b - a)(b^2 + ab + a^2)}{3(b - a)} = \frac{b^2 + ab + a^2}{3} \\
+    Var(X) = E[X^2] - (E[X])^2 = \frac{b^2 + ab + a^2}{3} - \left( \frac{b + a}{2} \right)^2 \\
+    = \frac{b^2 + ab + a^2}{3} - \frac{b^2 + 2ab + a^2}{4} = \frac{4(b^2 + ab + a^2) - 3(b^2 + 2ab + a^2)}{12} \\
+    = \frac{b^2 - 2ab + a^2}{12} = \frac{(b - a)^2}{12}
+\end{gather*}
 \end{document}
