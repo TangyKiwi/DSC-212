@@ -145,4 +145,18 @@ Now let $X$ be a random variable following a uniform distribution:
     = \frac{b^2 + ab + a^2}{3} - \frac{b^2 + 2ab + a^2}{4} = \frac{4(b^2 + ab + a^2) - 3(b^2 + 2ab + a^2)}{12} \\
     = \frac{b^2 - 2ab + a^2}{12} = \frac{(b - a)^2}{12}
 \end{gather*}
+\subsection{Moment Generating Functions}
+\begin{gather*}
+    \psi_X(t) = E[e^{tX}] = \int e^{tx} f_X(x) dx\\
+    \psi_X(t) = E[1 + tX + \frac{t^2 X^2}{2!} + \frac{t^3 X^3}{3!} + ...] \\
+    = 1 + tE[X] + \frac{t^2 E[X^2]}{2!} + \frac{t^3 E[X^3]}{3!} + ... \\
+    = \sum_{n=0}^{\infty} \frac{t^n E[X^n]}{n!}
+    \psi_X(0) = 1 \\
+    \psi_X'(t) = \sum_{n=1}^{\infty} \frac{t^{n-1} E[X^n]}{(n-1)!} \\
+    \psi_X'(0) = E[X] \\
+    \psi_X''(t) = \sum_{n=2}^{\infty} \frac{t^{n-2} E[X^n]}{(n-2)!} \\
+    \psi_X''(0) = E[X^2] \therefore \\
+    \psi_X^{(k)}(0) = E[X^k]
+\end{gather*}
+
 \end{document}
