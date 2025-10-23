@@ -1,0 +1,52 @@
+%! Author = Kevin Lin
+%! Date = 10/23/2025
+
+% Preamble
+\documentclass[11pt,a4paper,margin=1in]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\title{HW 2}
+\author{Kevin Lin}
+\date{10/23/2025}
+
+% Document
+\begin{document}
+\maketitle
+\section{}
+    Define deviation $D = E[(X - c)^2]$ for some constant $c$. We want to find
+    the value of $c$ that minimizes $D$. We can expand $D$ as follows:
+    \begin{gather*}
+        D = E[(X - c)^2] = E[X^2 - 2cX + c^2] = E[X^2] - 2cE[X] + c^2
+    \end{gather*}
+    To find the minimum value of $D$, we can take the derivative of $D$
+    with respect to $c$ and set it equal to 0:
+    \begin{gather*}
+        \frac{dD}{dc} = -2E[X] + 2c = 0 \therefore c = E[X]
+    \end{gather*}
+    Thus, the $D$ is minimized when $c = E[X]$.
+
+\section{}
+    For the particle's current position $k$, it can either hop left or right with
+    probability $p$ and $1 - p$ respectively. Let $E[X_n]$ be the expected position
+    of the particle after $n$ hops. We can express $E[X_n]$ in terms of $E[X_{n-1}]$:
+    \begin{align*}
+        E[X_n] &= p(E[X_{n-1}] - 1) + (1 - p)(E[X_{n-1}] + 1) \\
+        &= pE[X_{n - 1}] - p + E[X_{n - 1}] + 1 - pE[X_{n - 1}] - p \\
+        &= E[X_{n - 1}] + 1 - 2p
+    \end{align*}
+    Note that then:
+    \begin{gather*}
+        E[X_n] = E[X_{n-2}] + 2(1 - 2p)\\
+        E[X_n] = E[X_{n-3}] + 3(1 - 2p)\\
+        \vdots\\
+        E[X_n] = E[X_0] + n(1 - 2p)
+    \end{gather*}
+    Since the initial position $E[X_0] = 0$, we get $E[X_n] = n(1 - 2p)$.
+    
+    \vspace{10pt}
+    \noindent Because each jump is independent and identically distributed, we can express
+\end{document}
