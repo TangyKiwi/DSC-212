@@ -30,23 +30,23 @@
     Thus, the $D$ is minimized when $c = E[X]$.
 
 \section{}
-    For the particle's current position $k$, it can either hop left or right with
-    probability $p$ and $1 - p$ respectively. Let $E[X_n]$ be the expected position
-    of the particle after $n$ hops. We can express $E[X_n]$ in terms of $E[X_{n-1}]$:
-    \begin{align*}
-        E[X_n] &= p(E[X_{n-1}] - 1) + (1 - p)(E[X_{n-1}] + 1) \\
-        &= pE[X_{n - 1}] - p + E[X_{n - 1}] + 1 - pE[X_{n - 1}] - p \\
-        &= E[X_{n - 1}] + 1 - 2p
-    \end{align*}
-    Note that then:
+    Note that each jump is independent and identically distributed. For the current
+    particle's current position $k$, it can either hop left or right with probability
+    $p$ and $1 - p$ respectively. Thus, we can express the expected position $E[X_n]$
+    after $n$ jumps as follows:
     \begin{gather*}
-        E[X_n] = E[X_{n-2}] + 2(1 - 2p)\\
-        E[X_n] = E[X_{n-3}] + 3(1 - 2p)\\
-        \vdots\\
-        E[X_n] = E[X_0] + n(1 - 2p)
+        E[X_n] = \sum_{k=1}^n E[X_k] = nE[X_k] \\
+        E[X_k] = (-1)p + (1)(1 - p) = 1 - 2p \\
+        \therefore E[X_n] = n(1 - 2p)
     \end{gather*}
-    Since the initial position $E[X_0] = 0$, we get $E[X_n] = n(1 - 2p)$.
+
+    Likewise, we can calculate the variance $Var(X_n)$ as:
+    \begin{gather*}
+        Var(X_n) = \sum_{k=1}^n Var(X_k) = nVar(X_k) \\
+        Var(X_k) = E[X_k^2] - (E[X_k])^2 \\ 
+        E[X_k^2] = (-1)^2p + (1)^2(1 - p) = 1 \\
+        Var(X_k) = 1 - (1 - 2p)^2 = 4p(1 - p) \\
+        \therefore Var(X_n) = 4np(1 - p)
+    \end{gather*}
     
-    \vspace{10pt}
-    \noindent Because each jump is independent and identically distributed, we can express
 \end{document}
