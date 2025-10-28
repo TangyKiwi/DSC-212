@@ -5,9 +5,43 @@
 \documentclass[11pt,a4paper,margin=1in]{article}
 
 % Packages
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumerate}
+
+\usepackage{lipsum}
+
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
 
 \title{HW 2}
 \author{Kevin Lin}
@@ -48,5 +82,84 @@
         Var(X_k) = 1 - (1 - 2p)^2 = 4p(1 - p) \\
         \therefore Var(X_n) = 4np(1 - p)
     \end{gather*}
-    
+
+\section{}
+\begin{lstlisting}[language=python]
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+np.random.seed(0)
+
+X_bar_n = np.mean(np.random.uniform(0, 1, 100))
+mu_X = 0.5
+var_X_bar = (1/12)/100
+std_X_bar = np.sqrt(var_X_bar)
+print("Mean:", mu_X)
+print("Var:", var_X_bar)
+
+a_vals = [-2, -1, -0.5, -0.25, 0, 0.25, 0.5, 1, 2]
+z_vals = []
+for _ in range(100):
+    sample_mean = np.mean(np.random.uniform(0, 1, 100))
+    z_vals.append((sample_mean - mu_X) / np.sqrt(var_X / 100))
+
+counts = [int((np.array(z_vals) <= a).sum()) for a in a_vals]
+cdf = 100 * norm.cdf(a_vals)
+
+plt.plot(a_vals, counts, "o-", label="Counts Zn <= a")
+plt.plot(a_vals, cdf, "s--", label="100x CDF (N(0,1))")
+plt.legend()
+plt.xlabel("a values")
+plt.ylabel("Counts / 100x CDF")
+plt.show()
+\end{lstlisting}
+\begin{verbatim}
+Mean: 0.5
+Var: 0.0008333333333333333
+\end{verbatim}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{3.png}
+\end{figure}
+
+\section{}
+\begin{lstlisting}[language=python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(0)
+
+Xbars_normal = []
+Xbars_cauchy = []
+for i in range(1000):
+    Xbars_normal.append(np.mean(np.random.standard_normal(size=i + 1)))
+    Xbars_cauchy.append(np.mean(np.random.standard_cauchy(size=i + 1)))
+
+def plot(Xbars, title):
+    plt.plot(range(1, 1001), Xbars)
+    plt.xlabel("n")
+    plt.ylabel("Sample Mean")
+    plt.title(title)
+    plt.show()
+
+plot(Xbars_normal, "Sample Means from Standard Normal Distribution")
+plot(Xbars_cauchy, "Sample Means from Standard Cauchy Distribution")
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{4norm.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{4cauchy.png}
+\end{figure}
+
+    \noindent The Cauchy distribution of sample means differs from the normal distribution as 
+    the Cauchy distribution has no finite mean (expectation is undefined). Note:
+
+    \begin{align*}
+        E[X] &= \int_{-\infty}^{\infty} x f_X(x) dx = \int_{-\infty}^{\infty} \frac{x}{\pi(1 + x^2)} dx \\
+        &\approx \int_{-\infty}^{\infty} \frac{1}{x} dx = \text{undefined}
+    \end{align*}
 \end{document}
