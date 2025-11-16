@@ -1,0 +1,271 @@
+%! Author = Kevin Lin
+%! Date = 11/22/2025
+
+% Preamble
+\documentclass[11pt,a4paper,margin=1in]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\title{HW 3}
+\author{Kevin Lin}
+\date{11/22/2025}
+
+% Document
+\begin{document}
+\maketitle
+\section{}
+    Let $X_1, X_2, \ldots, X_n$ be IID such that $X_i$ is uniform in $[0, \theta]$. 
+    \subsection{}
+    For $\hat{\theta} = \max(X_1, X_2, \ldots, X_n)$:
+    \begin{gather*}
+        F_{\hat{\theta}}(x) = P(\hat{\theta} \leq x) = P(X_1 \leq x, X_2 \leq x, \ldots, X_n \leq x) \\
+        = P(X_1 \leq x)P(X_2 \leq x) \cdots P(X_n \leq x) = \left(\frac{x}{\theta}\right)^n \text{ for } 0 \leq x \leq \theta \\
+        \therefore
+        f_{\hat{\theta}}(x) = \frac{d}{dx}F_{\hat{\theta}}(x) = \frac{d}{dx}\left(\frac{x}{\theta}\right)^n = \frac{n}{\theta^n}x^{n-1}
+    \end{gather*}
+    The bias is $E[\hat{\theta}] - \theta$. Then expectation is:
+    \begin{align*}
+        E[\hat{\theta}] &= \int_0^{\theta} x f_{\hat{\theta}}(x) \, dx \\
+        &= \int_0^{\theta} x \cdot \frac{n}{\theta^n} x^{n-1} \, dx \\
+        &= \frac{n}{\theta^n} \int_0^{\theta} x^n \, dx \\
+        &= \frac{n}{\theta^n} \cdot \frac{\theta^{n+1}}{n+1} \\
+        &= \frac{n}{n+1} \theta
+    \end{align*} 
+    Thus, the bias is:
+    \[
+        \text{Bias}(\hat{\theta}) = E[\hat{\theta}] - \theta = \frac{n}{n+1} \theta - \theta = -\frac{\theta}{n+1}
+    \]
+    The standard error is:
+    \begin{align*}
+        \text{se}(\hat{\theta}) &= \sqrt{var(\hat{\theta})} \\
+        &= \sqrt{E[\hat{\theta}^2] - (E[\hat{\theta}])^2}
+    \end{align*}
+    $E[\hat{\theta}^2]$ is:
+    \begin{align*}
+        E[\hat{\theta}^2] &= \int_0^{\theta} x^2 f_{\hat{\theta}}(x) \, dx \\
+        &= \int_0^{\theta} x^2 \cdot \frac{n}{\theta^n} x^{n-1} \, dx \\
+        &= \frac{n}{\theta^n} \int_0^{\theta} x^{n+1} \, dx \\
+        &= \frac{n}{\theta^n} \cdot \frac{\theta^{n+2}}{n+2} \\
+        &= \frac{n}{n+2} \theta^2
+    \end{align*}
+    Thus, the standard error is:
+    \begin{align*}
+        \text{se}(\hat{\theta}) &= \sqrt{\frac{n}{n+2} \theta^2 - \left(\frac{n}{n+1} \theta\right)^2} \\
+        &= \theta \sqrt{\frac{n}{n+2} - \frac{n^2}{(n+1)^2}} \\
+        &= \theta \sqrt{\frac{n(n+1)^2 - n^2(n+2)}{(n+2)(n+1)^2}} \\
+        &= \theta \sqrt{\frac{n((n^2 + 2n + 1) - (n^2 + 2n))}{(n+2)(n+1)^2}} \\
+        &= \theta \sqrt{\frac{n}{(n+2)(n+1)^2}}
+    \end{align*}
+    The mean squared error is:
+    \begin{align*}
+        \text{MSE}(\hat{\theta}) &= E[(\hat{\theta} - \theta)^2] \\
+        &= var(\hat{\theta}) + (\text{Bias}(\hat{\theta}))^2 \\
+        &= \left(\theta^2 \frac{n}{(n+2)(n+1)^2}\right) + \left(-\frac{\theta}{n+1}\right)^2 \\
+        &= \theta^2 \left(\frac{n}{(n+2)(n+1)^2} + \frac{1}{(n+1)^2}\right) \\
+        &= \theta^2 \left(\frac{n + (n+2)}{(n+2)(n+1)^2}\right) \\
+        &= \theta^2 \left(\frac{2n + 2}{(n+2)(n+1)^2}\right) \\
+        &= \theta^2 \left(\frac{2(n + 1)}{(n+2)(n+1)^2}\right) \\
+        &= \theta^2 \left(\frac{2}{(n+2)(n+1)}\right)
+    \end{align*}
+
+    \subsection{}
+    For $\hat{\theta} = 2X_n = \frac{2}{n}\sum_{i=1}^n X_i$: \\
+    The bias is $E[\hat{\theta}] - \theta$. Then expectation is:
+    \begin{align*}
+        E[\hat{\theta}] &= E\left[\frac{2}{n} \sum_{i=1}^n X_i\right] \\
+        &= \frac{2}{n} \sum_{i=1}^n E[X_i] \\
+        &= \frac{2}{n} \cdot n \cdot \frac{\theta}{2} \\
+        &= \theta
+    \end{align*}
+    Thus, the bias is:
+    \[
+        \text{Bias}(\hat{\theta}) = E[\hat{\theta}] - \theta = \theta - \theta = 0.
+    \]
+    The standard error is:
+    \begin{align*}
+        \text{se}(\hat{\theta}) &= \sqrt{var(\hat{\theta})} \\
+        &= \sqrt{var\left(\frac{2}{n} \sum_{i=1}^n X_i\right)} \\
+        &= \frac{2}{n} \sqrt{var\left(\sum_{i=1}^n X_i\right)} \\
+        &= \frac{2}{n} \sqrt{\sum_{i=1}^n var(X_i)} \\
+        &= \frac{2}{n} \sqrt{n \cdot var(X_i)} \\
+        &= \frac{2}{n} \sqrt{n \cdot \frac{\theta^2}{12}} \\
+        &= \frac{2}{n} \cdot \theta \cdot \sqrt{\frac{n}{12}} \\
+        &= \frac{\theta}{\sqrt{3n}}
+    \end{align*}
+    Note that since the bias is 0, the MSE is just the variance:
+    \begin{align*}
+        \text{MSE}(\hat{\theta}) &= var(\hat{\theta}) \\
+        &= \left(\frac{\theta}{\sqrt{3n}}\right)^2 \\
+        &= \frac{\theta^2}{3n}
+    \end{align*}
+
+\section{}
+    Let $X_1, \ldots, X_n$ be IID with $X_i$ being uniform in $[a, b]$.
+    \subsection{}
+    The method of moments estimator for $a$ is:
+    \begin{align*}
+        E[X_i] &= \frac{a + b}{2} \\
+        \bar{X} &= \frac{a + b}{2} \\
+        \therefore \hat{a} &= 2\bar{X} - b
+    \end{align*}
+    The method of moments estimator for $b$ is:
+    \begin{align*}
+        E[X_i^2] &= \frac{a^2 + ab + b^2}{3} \\
+        \overline{X^2} &= \frac{a^2 + ab + b^2}{3} \\
+        \therefore 3\overline{X^2} &= a^2 + ab + b^2
+    \end{align*}
+    Substituting in $\hat{a}$:
+    \begin{align*}
+        3\overline{X^2} &= (2\bar{X} - b)^2 + (2\bar{X} - b)b + b^2 \\
+        &= 4\bar{X}^2 - 4\bar{X}b + b^2 + 2\bar{X}b - b^2 + b^2 \\
+        &= 4\bar{X}^2 - 2\bar{X}b + b^2
+    \end{align*}
+    Thus, the method of moments estimator for $b$ is:
+    \begin{align*}
+        b^2 - 2\bar{X}b + (4\bar{X}^2 - 3\overline{X^2}) &= 0 \\
+        \therefore \hat{b} &= \frac{2\bar{X} \pm \sqrt{(-2\bar{X})^2 - 4(4\bar{X}^2 - 3\overline{X^2})}}{2} \\
+        &= \bar{X} \pm \sqrt{3(\overline{X^2} - \bar{X}^2)}
+    \end{align*}
+    Arguably, $a < b$, so we can finalize the estimators for $a$ and $b$ 
+    respectively as the negative and positive roots:
+    \begin{align*}
+        \hat{a} &= 2\bar{X} - \left(\bar{X} + \sqrt{3(\overline{X^2} - \bar{X}^2)}\right) = \bar{X} - \sqrt{3(\overline{X^2} - \bar{X}^2)} \\
+        \hat{b} &= \bar{X} + \sqrt{3(\overline{X^2} - \bar{X}^2)}
+    \end{align*}
+
+    \subsection{}
+    To find the MLE, we first calculate the likelihood function:
+    \begin{align*}
+        L(a, b) &= f(X_1, X_2, \ldots, X_n; a, b) \\
+        &= \prod_{i=1}^n f(X_i; a, b) \\
+        &= \prod_{i=1}^n \frac{1}{b - a} \\
+        &= \left(\frac{1}{b - a}\right)^n
+    \end{align*}
+    for $a \leq X_i \leq b$ for all $i$, and 0 otherwise. To maximize $L(a, b)$, 
+    we need to minimize $b - a$. Given the constraints, the smallest possible 
+    value for $b - a$ occurs when $a = \min(X_1, X_2, \ldots, X_n)$ and 
+    $b = \max(X_1, X_2, \ldots, X_n)$. Thus, the MLE for $a$ and $b$ are:
+    \begin{align*}
+        \hat{a} = \min(X_1, X_2, \ldots, X_n) \\
+        \hat{b} = \max(X_1, X_2, \ldots, X_n)
+    \end{align*}
+
+\section{}
+    Let $X_1, \dots X_n$ be IID $\mathcal{N}(\mu, \sigma^2)$. When estimating
+    the variance, the biased estimator has a better MSE than the unbiased estimator.
+    The unbiased estimator for variance is:
+    \[
+        S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2
+    \]
+    The biased estimator for variance is:
+    \[
+        \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2
+    \]
+    We know that $E[S^2] = \sigma^2$ and $E[\hat{\sigma}^2] = \frac{n-1}{n} \sigma^2$.
+    Thus, the bias for $\hat{\sigma}^2$ is:
+    \[
+        \text{Bias}(\hat{\sigma}^2) = E[\hat{\sigma}^2] - \sigma^2 = \frac{n-1}{n} \sigma^2 - \sigma^2 = -\frac{\sigma^2}{n}
+    \]
+    We can calculate the variance of $S^2$ by using the property of the Chi 
+    Squared distribution:
+    \begin{align*}
+        \frac{(n-1)S^2}{\sigma^2} &\sim \chi^2_{n-1} \\
+        var\left(\frac{(n-1)S^2}{\sigma^2}\right) &= var(\chi^2_{n-1}) = 2(n-1) \\
+        \frac{(n-1)^2}{\sigma^4} var(S^2) &= 2(n-1) \\
+        var(S^2) &= \frac{2\sigma^4}{n-1}
+    \end{align*}
+    Note that $\hat{sigma}^2 = \frac{n-1}{n} S^2$. Thus, the variance of 
+    $\hat{\sigma}^2$ is:
+    \begin{align*}
+        var(\hat{\sigma}^2) &= var\left(\frac{n-1}{n} S^2\right) \\
+        &= \left(\frac{n-1}{n}\right)^2 var(S^2) \\
+        &= \left(\frac{n-1}{n}\right)^2 \cdot \frac{2\sigma^4}{n-1} \\
+        &= \frac{2(n-1)}{n^2} \sigma^4
+    \end{align*}
+    Thus, the MSE of $S^2$ is:
+    \begin{align*}
+        \text{MSE}(S^2) &= var(S^2) \\
+        &= \frac{2\sigma^4}{n-1}
+    \end{align*}
+    The MSE of $\hat{\sigma}^2$ is:
+    \begin{align*}
+        \text{MSE}(\hat{\sigma}^2) &= var(\hat{\sigma}^2) + (\text{Bias}(\hat{\sigma}^2))^2 \\
+        &= \frac{2(n-1)}{n^2} \sigma^4 + \left(-\frac{\sigma^2}{n}\right)^2 \\
+        &= \frac{2(n-1)}{n^2} \sigma^4 + \frac{\sigma^4}{n^2} \\
+        &= \frac{2n - 2 + 1}{n^2} \sigma^4 \\
+        &= \frac{2n - 1}{n^2} \sigma^4
+    \end{align*}
+    Comparing the two MSEs:
+    \begin{align*}
+        \text{MSE}(S^2) &\text{ ? } \text{MSE}(\hat{\sigma}^2) \\
+        \frac{2\sigma^4}{n-1} &\text{ ? } \frac{2n - 1}{n^2} \sigma^4 \\
+        \frac{2}{n-1} &\text{ ? } \frac{2n - 1}{n^2} \\
+        2n^2 &\text{ ? } (2n - 1)(n - 1) \\
+        2n^2 &\text{ ? } 2n^2 - 3n + 1 \\
+        0 &\text{ ? } -3n + 1 \\
+        3n &\text{ ? } 1
+    \end{align*}
+    Since $n$ is a positive integer and $3n > 1$ for all $n \geq 1$, we can 
+    conclude that $\text{MSE}(S^2) > \text{MSE}(\hat{\sigma}^2)$. Thus, the biased
+    estimator $\hat{\sigma}^2$ has a better MSE than the unbiased estimator $S^2$.
+
+\section{}
+    Let $P(X = 1) = P(X = -1) = 0.5$ and define:
+    \[
+        X_n = 
+        \begin{cases}
+            X & \text{with probability } 1 - \frac{1}{n} \\
+            e^n & \text{with probability } \frac{1}{n}
+        \end{cases}
+    \]
+    \subsection{}
+    To show that $X_n$ converges in probability to $X$, we need to show that for
+    any $\epsilon > 0$:
+    \[
+        \lim_{n \to \infty} P(|X_n - X| \geq \epsilon) = 0
+    \]
+    Note that:
+    \begin{align*}
+        P(|X_n - X| \geq \epsilon) &= P(X_n \neq X) \\
+        &= P\left(X_n = e^n\right) \\
+        &= \frac{1}{n}
+    \end{align*}
+    Thus,
+    \[
+        \lim_{n \to \infty} P(|X_n - X| \geq \epsilon) = \lim_{n \to \infty} \frac{1}{n} = 0
+    \]
+    which shows that $X_n$ converges in probability to $X$.
+
+    \subsection{}
+    As $n \to \infty$:
+    \[
+        X_n \to 
+        \begin{cases}
+            X & \text{with probability } 1 \\
+            \infty & \text{with probability } 0
+        \end{cases} = X \text {with probability } 1
+    \]
+    Thus, $X_n$ converges to $X$ in distribution.
+
+    \subsection{}
+    $E((X_n - X)^2)$ is:
+    \begin{align*}
+        E((X_n - X)^2) &= E\left[(X_n - X)^2 | X_n = X\right] P(X_n = X) + E\left[(X_n - X)^2 | X_n = e^n\right] P(X_n = e^n) \\
+        \text{Note that } &E\left[(X_n - X)^2 | X_n = X\right] = 0 \\
+        &= 0 \cdot \left(1 - \frac{1}{n}\right) + E\left[(e^n - X)^2\right] \cdot \frac{1}{n} \\
+        &= E[e^{2n} - 2e^n X + X^2] \cdot \frac{1}{n} \\
+        &= \left(e^{2n} - 2e^n E[X] + E[X^2]\right) \cdot \frac{1}{n} \\
+        E[X] &= 1(0.5) + (-1)(0.5) = 0 \\
+        E[X^2] &= 1^2(0.5) + (-1)^2(0.5) = 1, \text{ so:} \\
+        &= \left(e^{2n} - 0 + 1\right) \cdot \frac{1}{n} \\
+        &= \frac{e^{2n} + 1}{n}
+    \end{align*}
+    \[
+        \lim_{n \to \infty} E((X_n - X)^2) = \lim_{n \to \infty} \frac{e^{2n} + 1}{n} = \infty
+    \]
+    Thus, $E((X_n - X)^2)$ does not converge to 0.
+
+\end{document}
