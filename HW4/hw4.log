@@ -3,8 +3,8 @@ entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/tangykiwi/Desktop/UCSD/DSC-212/HW3/hw3
-(/Users/tangykiwi/Desktop/UCSD/DSC-212/HW3/hw3.tex
+**/Users/tangykiwi/Desktop/UCSD/DSC-212/HW4/hw4
+(/Users/tangykiwi/Desktop/UCSD/DSC-212/HW4/hw4.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -108,8 +108,8 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 LaTeX Warning: Unused global option(s):
     [margin].
 
-(./hw3.aux)
-\openout1 = `hw3.aux'.
+(./hw4.aux)
+\openout1 = `hw4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
 LaTeX Font Info:    ... okay on input line 17.
@@ -136,46 +136,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-[2]
-
-[3]
-
-[4]
-
-[5]
-
-[6]
-
-[7]
-Overfull \hbox (81.03319pt too wide) detected at line 265
-[]
- []
-
-
-
-[8]
-
-[9] (./hw3.aux)
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./hw4.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1743 strings out of 473190
- 24849 string characters out of 5715801
- 422587 words of memory out of 5000000
- 25028 multiletter control sequences out of 15000+600000
- 566241 words of font info for 64 fonts, out of 8000000 for 9000
+ 1726 strings out of 473190
+ 24481 string characters out of 5715801
+ 408586 words of memory out of 5000000
+ 25012 multiletter control sequences out of 15000+600000
+ 564081 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,11n,65p,257b,218s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on hw3.pdf (9 pages, 135550 bytes).
+ 56i,6n,65p,257b,218s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on hw4.pdf (1 page, 27830 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 23 PDF objects out of 1000 (max. 8388607)
+ 13 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
