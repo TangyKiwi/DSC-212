@@ -17,4 +17,122 @@
 \begin{document}
 \maketitle
 
+\section{}
+For Poisson($\lambda$), we have $E[X] = \lambda$ and $Var(X) = \lambda$. Thus,
+the method of moments estimator is $\hat{\lambda}_{MM} = \bar{X}$. We can 
+calculate the MLE as follows:
+\begin{align*}
+    P(X = x) &= \frac{e^{-\lambda}\lambda^x}{x!} \\
+    L(\lambda) &= \prod_{i = 1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!} \\
+    \ell(\lambda) &= \log(L(\lambda)) = \sum_{i = 1}^n \left(-\lambda + x_i \log(\lambda) - \log(x_i!)\right) \\
+    \ell(\lambda) &= -n\lambda + \log(\lambda)\sum_{i = 1}^n x_i - \sum_{i = 1}^n \log(x_i!) \\
+    \frac{d\ell}{d\lambda} &= -n + \frac{1}{\lambda}\sum_{i = 1}^n x_i = 0 \\
+    \hat{\lambda}_{MLE} &= \frac{1}{n}\sum_{i = 1}^n x_i = \bar{X}
+\end{align*}
+We can calculate the Fisher information $J(\lambda)$ as follows:
+\begin{align*}
+    \ell(\lambda) &= x\log(\lambda) - \lambda - \log(x!) \\
+    \frac{d\ell}{d\lambda} &= \frac{x}{\lambda} - 1 \\
+    \frac{d^2\ell}{d\lambda^2} &= -\frac{x}{\lambda^2} \\
+    J(\lambda) &= -E\left[\frac{d^2\ell}{d\lambda^2}\right] = -E\left[-\frac{X}{\lambda^2}\right] = \frac{E[X]}{\lambda^2} = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda} \\
+\end{align*}
+
+\section{}
+\subsection{}
+The Fisher information of $f(x; \theta) = \frac{1}{\sqrt{2\pi\theta}}e^{-\frac{x^2}{2\theta}}$ is calculated as follows:
+\begin{align*}
+    \ell(\theta) &= -\frac{1}{2}\log(2\pi\theta) - \frac{x^2}{2\theta} \\
+    \frac{d\ell}{d\theta} &= -\frac{1}{2\theta} + \frac{x^2}{2\theta^2} \\
+    \frac{d^2\ell}{d\theta^2} &= \frac{1}{2\theta^2} - \frac{x^2}{\theta^3} \\
+    J(\theta) &= -E\left[\frac{d^2\ell}{d\theta^2}\right] = -E\left[\frac{1}{2\theta^2} - \frac{X^2}{\theta^3}\right] = -\left[\frac{1}{2\theta^2} - \frac{\theta}{\theta^3}\right] = \frac{1}{2\theta^2}
+\end{align*}
+The Cramer-Rao bound on the MSE is given by:
+\[
+    \text{MSE}(\hat{\theta}) \geq \frac{1}{nJ(\theta)} = \frac{1}{n \cdot \frac{1}{2\theta^2}} = \frac{2\theta^2}{n}
+\]
+\subsection{}
+The fisher information of $f(x; \theta) = \theta e^{-\theta x}$ is calculated as follows:
+\begin{align*}
+    \ell(\theta) &= \log(\theta) - \theta x \\
+    \frac{d\ell}{d\theta} &= \frac{1}{\theta} - x \\
+    \frac{d^2\ell}{d\theta^2} &= -\frac{1}{\theta^2} \\
+    J(\theta) &= -E\left[\frac{d^2\ell}{d\theta^2}\right] = -E\left[-\frac{1}{\theta^2}\right] = \frac{1}{\theta^2}
+\end{align*}
+The Cramer-Rao bound on the MSE is given by:
+\[
+    \text{MSE}(\hat{\theta}) \geq \frac{1}{nJ(\theta)} = \frac{1}{n \cdot \frac{1}{\theta^2}} = \frac{\theta^2}{n}
+\]
+
+\section{}
+Given $X_1 \ldots X_n$ iid from some distribution, the empirical CDF is:
+\[
+    \hat{F}_n(x) = \frac{1}{n}\sum_{i = 1}^n I\{X_i \leq x\}
+\]
+Then for each distinct point $x$, $y$, we have:
+\begin{align*}
+    \hat{F}_n(x) = \frac{1}{n}\sum_{i = 1}^n I\{X_i \leq x\} \\
+    \hat{F}_n(y) = \frac{1}{n}\sum_{i = 1}^n I\{X_i \leq y\}
+\end{align*}
+So we can calculate the covariance as follows:
+\begin{align*}
+    Cov(\hat{F}_n(x), \hat{F}_n(y)) &= E[\hat{F}_n(x)\hat{F}_n(y)] - E[\hat{F}_n(x)]E[\hat{F}_n(y)] \\
+    &= E\left[\left(\frac{1}{n}\sum_{i = 1}^n I\{X_i \leq x\}\right)\left(\frac{1}{n}\sum_{j = 1}^n I\{X_j \leq y\}\right)\right] - F(x)F(y) \\
+    &= \frac{1}{n^2}E\left[\sum_{i = 1}^n \sum_{j = 1}^n I\{X_i \leq x\}I\{X_j \leq y\}\right] - F(x)F(y) \\
+    &= \frac{1}{n^2}\left(\sum_{i = j} E[I\{X_i \leq x\}I\{X_i \leq y\}] + \sum_{i \neq j} E[I\{X_i \leq x\}I\{X_j \leq y\}]\right) - F(x)F(y) \\
+    &= \frac{1}{n^2}\left(nF(\min(x, y)) + n(n - 1)F(x)F(y)\right) - F(x)F(y) \\
+    &= \frac{1}{n}F(\min(x, y)) + \frac{n - 1}{n}F(x)F(y) - F(x)F(y) \\
+    &= \frac{1}{n}F(\min(x, y)) - \frac{1}{n}F(x)F(y) \\
+    &= \frac{1}{n}\left(F(\min(x, y)) - F(x)F(y)\right)
+\end{align*}
+
+\section{}
+\subsection{}
+The observed $X$ has a mixed density:
+\[
+    f_\theta(x) = \theta f_1(x) + (1 - \theta) f_0(x)
+\]
+The Fisher information $J(\theta)$ is calculated as follows:
+\begin{align*}
+    \ell(\theta; x) &= \log(f_\theta(x)) = \log[\theta f_1(x) + (1 - \theta) f_0(x)] \\
+    S(\theta; x) &= \frac{d\ell}{d\theta} = \frac{f_1(x) - f_0(x)}{\theta f_1(x) + (1 - \theta) f_0(x)} \\
+    J(\theta) &= E[S(\theta; X)^2] = \int \left(\frac{f_1(x) - f_0(x)}{\theta f_1(x) + (1 - \theta) f_0(x)}\right)^2 (\theta f_1(x) + (1 - \theta) f_0(x)) dx \\
+    &= \int \frac{(f_1(x) - f_0(x))^2}{\theta f_1(x) + (1 - \theta) f_0(x)} dx
+\end{align*}
+\subsection{}
+The Cramer-Rao lower bound on the MSE of an unbiased estimate of $\theta$ is given by:
+\[
+    \text{MSE}(\hat{\theta}) \geq \frac{1}{nJ(\theta)} = \frac{1}{n \int \frac{(f_1(x) - f_0(x))^2}{\theta f_1(x) + (1 - \theta) f_0(x)} dx}
+\]
+\subsection{}
+We want an unbiased estimator of $\theta$. We want to then find $h(X)$ such that $E_\theta[h(X)] = \theta$:
+\begin{gather*}
+    \theta \int h(x) f_1(x) dx + (1 - \theta) \int h(x) f_0(x) dx = \theta \\
+\end{gather*}
+Let $a = \int h(x) f_1(x) dx$ and $b = \int h(x) f_0(x) dx$. Then we have:
+\begin{gather*}
+    \theta a + (1 - \theta) b = \theta \\
+    b + \theta(a - b) = \theta \\
+    b = 0, a = 1 \\
+\end{gather*}
+So then $h(X)$ must satisfy:
+\begin{gather*}
+    \int h(x) f_0(x) dx = 0 \\
+    \int h(x) f_1(x) dx = 1 \\
+\end{gather*}
+We know $h(X)$ must be a combination of $f_0$ and $f_1$. Thus, we can let:
+\begin{gather*}
+    h(X) = a f_1(X) + b f_0(X) \\
+    \int (a f_1(x) + b f_0(x)) f_0(x) dx = 0 \implies a \int f_1(x) f_0(x) dx + b \int f_0(x)^2 dx = 0 \\
+    \int (a f_1(x) + b f_0(x)) f_1(x) dx = 1 \implies a \int f_1(x)^2 dx + b \int f_1(x) f_0(x) dx = 1 \\
+\end{gather*}
+Let $A = \int f_1(x)^2, B = \int f_1(x) f_0(x), C = \int f_0(x)^2$. Then we have the system of equations:
+\begin{gather*}
+    aB + bC = 0 \\
+    aA + bB = 1 \\
+    \therefore \\
+    a = \frac{C}{AC - B^2}, b = -\frac{B}{AC - B^2} \\
+    \therefore h(X) = \frac{C f_1(X) - B f_0(X)}{AC - B^2} \\
+    \hat{\theta}(X) = \frac{\left(\int f_0(x)^2 dx\right) f_1(X) - \left(\int f_1(x) f_0(x) dx\right) f_0(X)}{\left(\int f_1(x)^2 dx\right)\left(\int f_0(x)^2 dx\right) - \left(\int f_1(x) f_0(x) dx\right)^2} \\
+\end{gather*}
+
 \end{document}
